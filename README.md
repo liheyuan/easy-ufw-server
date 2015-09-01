@@ -3,8 +3,9 @@
 Install
 -----------------------------------
 1. node
-2. Configure sid
-sudo chown root ./app/bin/www
-sudo chmod u+s ./app/bin/www
+sudo apt-get install nodejs-legacy
+2. dependency
+cd app
+node install
 3. Run
 

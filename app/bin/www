@@ -16,6 +16,16 @@ var port = normalizePort(process.env.PORT || '3333');
 app.set('port', port);
 
 /**
+ * Check if Run As sudo
+ */
+var uid = parseInt(process.env.SUDO_UID);
+if (isNaN(uid)) {
+    console.error("Must run as sudo for use ufw");
+    process.exit(-1);
+}
+console.log(uid);
+
+/**
  * Create HTTP server.
  */
 
