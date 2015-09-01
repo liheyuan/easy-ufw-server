@@ -1,29 +1,27 @@
 var exec = require('child_process').exec;
 var S = require('string');
-
-var EXEC_ERR = "execute command failed!"
-var PARSE_ERR = "parse result failed!"
+var constants = require("./constants");
 
 function getUfwStatus(callback){
-    exec("sudo ufw status", function(error, stdout, stderr){
+    exec("ufw status", constants.EXEC_OPTION, function(error, stdout, stderr){
         if(error){
-            callback(EXEC_ERR);
+            callback(constants.EXEC_ERR);
         }else{
             match = stdout.match("^Status:\s*(.*)\s*");
             if(match && match.length >= 2){
                 // success
                 callback(null, match[1].trim());
             }else{
-                callback(PARSE_ERR);
+                callback(constants.PARSE_ERR);
             }
         }
     });
 };
 
 function getUfwRules(callback){
-    exec("sudo ufw status", function(error, stdout, stderr){
+    exec("ufw status", constants.EXEC_OPTION, function(error, stdout, stderr){
         if(error){
-            callback(EXEC_ERR);
+            callback(constants.EXEC_ERR);
         }else{
             var ruleStart = false;
             var NF = 3;
