@@ -20,10 +20,9 @@ app.set('port', port);
  */
 var uid = parseInt(process.env.SUDO_UID);
 if (isNaN(uid)) {
-    console.error("Must run as sudo for use ufw");
+    console.error("Must run as sudo for use ufw.");
     process.exit(-1);
 }
-console.log(uid);
 
 /**
  * Create HTTP server.

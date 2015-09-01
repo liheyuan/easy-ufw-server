@@ -1,4 +1,5 @@
 var express = require('express');
+var passport = require('passport');
 var router = express.Router();
 
 var ufwGet = require('../ufw/get');
@@ -10,7 +11,9 @@ router.get('/', function(req, res, next) {
 });
 
 // get ufw status
-router.get('/ufw/status', function(req, res, next) {
+router.get('/ufw/status', 
+        passport.authenticate('basic', { session: false }), 
+        function(req, res, next) {
     ufwGet.getUfwStatus(function(error, data){
         if(error){
             res.status(500);
